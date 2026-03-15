@@ -38,7 +38,9 @@ export default function Header() {
   return (
     <header
       className={`fixed w-full z-50 transition-all duration-300 ${
-        hydrated && isScrolled ? "bg-white shadow-md py-2" : "bg-transparent py-4"
+        hydrated && isScrolled
+          ? "bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100 py-2"
+          : "bg-white/80 backdrop-blur-sm py-4"
       }`}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -87,9 +89,7 @@ export default function Header() {
                 ) : (
                   <Link
                     href={item.href}
-                    className={`text-base font-medium px-3 py-1.5 rounded-md transition-all duration-200 ${
-                      hydrated && isScrolled ? "text-gray-800 hover:bg-gray-100" : "text-white hover:bg-white/20 backdrop-blur-sm"
-                    } hover:text-[#3674B5]`}
+                    className="text-sm font-medium px-3 py-1.5 rounded-lg text-slate-700 hover:text-[#0B5ED7] hover:bg-blue-50 transition-all duration-200"
                   >
                     {item.name}
                   </Link>
@@ -101,17 +101,17 @@ export default function Header() {
           {/* Contact Button - Enhanced */}
           <div className="hidden lg:block">
             <Link
-              href="#contact"
-              className="flex items-center px-5 py-2.5 text-white font-medium bg-[#3674B5] hover:bg-[#266cb6] rounded-md transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
+              href="/contact"
+              className="inline-flex items-center gap-2 px-5 py-2.5 text-sm font-semibold text-white bg-[#0B5ED7] hover:bg-[#0846a5] rounded-xl transition-all duration-200 shadow-md shadow-blue-200"
             >
-              <Phone className="mr-2 h-4 w-4" />
+              <Phone className="h-4 w-4" />
               Get in Touch
             </Link>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className={`lg:hidden flex items-center justify-center w-12 h-12 rounded-full shadow-lg backdrop-blur-md bg-white/30  transition-colors duration-200 focus:outline-none ${hydrated && isScrolled ? "text-[#3674B5]" : "text-white"}`}
+            className={`lg:hidden flex items-center justify-center w-10 h-10 rounded-xl border border-slate-200 bg-white text-slate-700 transition-colors duration-200 focus:outline-none hover:border-[#0B5ED7] hover:text-[#0B5ED7]`}
             style={{ position: 'relative', zIndex: 1000 }}
             aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
@@ -151,11 +151,11 @@ export default function Header() {
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="fixed top-4 left-1/2 -translate-x-1/2 z-[999] w-[95vw] max-w-md"
           >
-            <div className="relative mt-16 bg-[#f2f9fd]/30 backdrop-blur-xl rounded-2xl shadow-2xl pt-4 pb-4 px-4 min-h-[180px]">
+            <div className="relative mt-16 bg-white rounded-2xl shadow-2xl border border-slate-100 pt-4 pb-4 px-4 min-h-[180px]">
               {/* No close button here, handled by the animated menu button */}
               <div className="flex flex-row items-stretch gap-4">
                 {/* Logo on the left */}
-                <div className="flex items-center pr-4 border-r border-[#e0eaf3]">
+                <div className="flex items-center pr-4 border-r border-slate-100">
                   <div className="relative h-14 w-24">
                     <Image
                       src="/Curezip-logo.png?height=150&width=250"
@@ -169,13 +169,11 @@ export default function Header() {
                 {/* Navigation grid on the right */}
                 <div className="flex-1 flex flex-col justify-center pl-6">
                   <div className="grid grid-cols-2 gap-4 mt-2">
-                    {navItems.map((item, idx) => (
+                    {navItems.map((item) => (
                       <Link
                         key={item.name}
                         href={item.href}
-                        className={`flex items-center justify-center text-center text-base font-semibold rounded-xl py-3 px-2 shadow transition-all duration-200
-                          ${idx % 2 === 0 ? 'bg-[#f2f9fd] text-[#3674B5] hover:bg-[#3674B5] hover:text-white' : 'bg-[#3674B5] text-white hover:bg-[#266cb6]'}
-                        `}
+                        className="flex items-center justify-center text-center text-sm font-semibold rounded-xl py-3 px-2 border border-slate-200 text-slate-700 bg-white hover:bg-[#0B5ED7] hover:text-white hover:border-[#0B5ED7] transition-all duration-200"
                         onClick={() => setIsMobileMenuOpen(false)}
                       >
                         {item.name}

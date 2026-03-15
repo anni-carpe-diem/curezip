@@ -11,16 +11,6 @@ const ProductImageCarousel = ({ images, productName }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
 
-  useEffect(() => {
-    let interval;
-    if (isHovered) {
-      interval = setInterval(() => {
-        setCurrentImageIndex((prev) => (prev + 1) % 4);
-      }, 2000);
-    }
-    return () => clearInterval(interval);
-  }, [isHovered]);
-
   // Get all available images
   const allImages = [
     images.image,
@@ -29,9 +19,21 @@ const ProductImageCarousel = ({ images, productName }) => {
     images.image4,
   ].filter(Boolean);
 
+  useEffect(() => {
+    if (!allImages.length) return;
+
+    let interval;
+    if (isHovered) {
+      interval = setInterval(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % allImages.length);
+      }, 2000);
+    }
+    return () => clearInterval(interval);
+  }, [isHovered, allImages.length]);
+
   return (
     <div 
-      className="relative h-64 bg-gradient-to-br from-[#ecf8ff] to-[#e1f4ff] p-6"
+      className="relative h-80 md:h-96 bg-gradient-to-br from-[#ecf8ff] to-[#e1f4ff] p-6"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -44,12 +46,14 @@ const ProductImageCarousel = ({ images, productName }) => {
           transition={{ duration: 0.5 }}
           className="absolute inset-0 flex items-center justify-center p-6"
         >
-          <Image
-            src={allImages[currentImageIndex] || "https://lh3.googleusercontent.com/d/1rXUi5eWiJK3fO3OTS23ETLdRzo3ujozW"}
+          <img
+            src={allImages[currentImageIndex]}
             alt={`${productName} - Image ${currentImageIndex + 1}`}
-            width={200}
-            height={200}
-            className="object-contain max-h-52 transform group-hover:scale-105 transition-transform duration-300"
+            width={320}
+            height={320}
+            className="object-contain max-h-72 md:max-h-80 transform group-hover:scale-105 transition-transform duration-300"
+            loading="lazy"
+            style={{ display: 'block', margin: '0 auto' }}
           />
         </motion.div>
       </AnimatePresence>
@@ -109,7 +113,7 @@ export default function ProductsPage() {
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-[url('/placeholder.svg?height=500&width=500')] bg-repeat opacity-20"></div>
         </div>
-        <div className="container mx-auto px-2 py-20 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-28 relative z-10">
           <motion.div variants={fadeIn} className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Our Products</h1>
             <p className="text-lg md:text-xl text-white/90">

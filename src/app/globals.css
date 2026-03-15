@@ -128,10 +128,20 @@
   }
 }
 
-*{
+* {
   scroll-behavior: smooth;
 }
+
 body {
   font-family: "Johnson Display", Helvetica, Arial, sans-serif;
+}
+
+/* Hide scrollbar while keeping scroll functionality */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE / Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;             /* Chrome / Safari */
 }
 

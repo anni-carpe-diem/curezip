@@ -31,7 +31,7 @@ export default function TeamPage() {
             name: "Mr. Gaurav Singh",
             position: "Managing Director",
             bio: "Founder Curezip Pharma is a first-generation entrepreneur. His emphasis on research, innovation, transparency and business ethics has helped to shape this company. He oversees all functions of Strategic Planning, Sales and Marketing & Custom Manufacturing. Under his direction, Curezip has been developing high-quality business strategies and plans ensuring their alignment with the short term and long – term objectives.",
-            image: "",
+            image: "/team/Gaurav_Singh.jpg",
         },
         {
             name: "Mr. Abhishek Kumar",
@@ -43,19 +43,19 @@ export default function TeamPage() {
             name: "Mr. Amit Kumar ",
             position: "Marketing Head",
             bio: "Is a dynamic and experienced professional in the pharma industries with a combined experience of two decades. His foresight and balanced thought process are an inspiration to others. He is highly focused and strongly determined. In his current role, he oversees Curezip Pharma's Sales and Marketing.",
-            image: "",
+            image: "/team/Amit_Kumar.jpg",
         },
         {
             name: "Dr. Pranay Pandey",
             position: "Product Consultant",
             bio: "Is a medical professional who leads the organisation quality right from the development of products to its commercialisation. His main focus is to identify the right products for our customers. His insight into various fields of medicines gives us a competitive edge. ",
-            image: "",
+            image: "/team/Pranay_Pandey.jpeg",
         },
         {
             name: "Mrs. Monika Singh ",
             position: "HR Head",
             bio: "Is a passionate professional who looks after developing and implementing HR strategies and initiatives aligned with the overall business strategy. Bridging management and employee relations by addressing demands, grievances or other issues. Managing the recruitment and selection process.  ",
-            image: "",
+            image: "/team/monika.jpeg",
         },
         {
             name: "Ms. Priya Bharti ",
@@ -90,7 +90,7 @@ export default function TeamPage() {
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-[url('/placeholder.svg?height=500&width=500')] bg-repeat opacity-20"></div>
         </div>
-        <div className="container mx-auto px-2 py-20 relative z-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-28 relative z-10">
           <motion.div variants={fadeIn} className="max-w-3xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">Our Team</h1>
             <p className="text-xl text-white/90">Meet the experts behind Curezip Pharma</p>

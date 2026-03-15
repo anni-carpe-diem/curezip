@@ -1,41 +1,125 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# =============================================================================
+# Next.js / Node.js — comprehensive .gitignore
+# =============================================================================
 
-# dependencies
-/node_modules
-/.pnp
+# ── Dependencies ──────────────────────────────────────────────────────────────
+node_modules/
+.pnp
 .pnp.*
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
+.pnpm-store/
 
-# testing
-/coverage
+# ── Next.js build output ──────────────────────────────────────────────────────
+.next/
+out/
+build/
+dist/
 
-# next.js
-/.next/
-/out/
+# ── TypeScript ────────────────────────────────────────────────────────────────
+*.tsbuildinfo
+next-env.d.ts
 
-# production
-/build
+# ── Environment variables ─────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+!.env.test
 
-# misc
-.DS_Store
-*.pem
+# ── Testing & coverage ────────────────────────────────────────────────────────
+/coverage/
+/.nyc_output/
+junit.xml
 
-# debug
+# ── Debug / logs ──────────────────────────────────────────────────────────────
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+*.log
+logs/
 
-# env files (can opt-in for committing if needed)
-.env*
+# ── Cache & temp files ────────────────────────────────────────────────────────
+.cache/
+.parcel-cache/
+.turbo/
+.swc/
+.eslintcache
+.stylelintcache
+*.tmp
+*.temp
 
-# vercel
+# ── OS generated files ────────────────────────────────────────────────────────
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# ── IDE & editor files ────────────────────────────────────────────────────────
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.sublime-workspace
+*.sublime-project
+
+# ── Vercel ────────────────────────────────────────────────────────────────────
 .vercel
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# ── Misc archives & secrets ───────────────────────────────────────────────────
+*.pem
+*.key
+*.p12
+*.pfx
+*.cer
+*.crt
+*.tgz
+*.zip
+*.tar.gz
+*.7z
+
+# ── Database files ────────────────────────────────────────────────────────────
+*.sqlite
+*.sqlite3
+*.db
+*.db-shm
+*.db-wal
+
+# ── Storybook ─────────────────────────────────────────────────────────────────
+storybook-static/
+
+# ── Sentry ────────────────────────────────────────────────────────────────────
+.sentryclirc
+.env.local
+.env.*.local
+.eslintcache
+
+# Ignore all images in public/products and public/team
+public/products/*
+public/team/*
+
+# Ignore all zip/tgz in public
+public/**/*.zip
+public/**/*.tgz
+
+# Ignore all images in public root
+public/*.png
+public/*.jpg
+public/*.jpeg
+public/*.svg
+
+# If you want to keep some images, remove those lines above or use Git LFS

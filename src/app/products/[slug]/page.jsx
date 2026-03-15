@@ -3,7 +3,7 @@
 import { use, useState, useEffect } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowLeft, ChevronRight } from "lucide-react"
+import { ArrowLeft, ChevronLeft, ChevronRight } from "lucide-react"
 import { notFound } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import products from "../../../data/products"
@@ -11,16 +11,6 @@ import products from "../../../data/products"
 const ProductImageCarousel = ({ images, productName }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
-
-    useEffect(() => {
-        let interval;
-        if (isHovered) {
-            interval = setInterval(() => {
-                setCurrentImageIndex((prev) => (prev + 1) % images.length);
-            }, 2000);
-        }
-        return () => clearInterval(interval);
-    }, [isHovered, images.length]);
 
     // Get all available images
     const allImages = [
@@ -30,13 +20,37 @@ const ProductImageCarousel = ({ images, productName }) => {
         images.image4,
     ].filter(Boolean);
 
+    useEffect(() => {
+        if (!allImages.length) return;
+
+        let interval;
+        if (isHovered) {
+            interval = setInterval(() => {
+                setCurrentImageIndex((prev) => (prev + 1) % allImages.length);
+            }, 2000);
+        }
+        return () => clearInterval(interval);
+    }, [isHovered, allImages.length]);
+
+    const hasMultipleImages = allImages.length > 1;
+
+    const showNextImage = () => {
+        if (!hasMultipleImages) return;
+        setCurrentImageIndex((prev) => (prev + 1) % allImages.length);
+    };
+
+    const showPrevImage = () => {
+        if (!hasMultipleImages) return;
+        setCurrentImageIndex((prev) => (prev - 1 + allImages.length) % allImages.length);
+    };
+
     return (
         <div 
             className="relative bg-gradient-to-br from-[#ecf8ff] to-[#e1f4ff] rounded-xl p-8"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
         >
-            <div className="relative w-full max-w-md mx-auto">
+            <div className="relative w-full max-w-md mx-auto flex items-center justify-center">
                 <AnimatePresence mode="wait">
                     <motion.div
                         key={currentImageIndex}
@@ -44,17 +58,38 @@ const ProductImageCarousel = ({ images, productName }) => {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.5 }}
-                        className="relative aspect-square"
+                        className="relative aspect-square flex items-center justify-center"
                     >
                         <Image
-                            src={allImages[currentImageIndex] || "https://lh3.googleusercontent.com/d/1rXUi5eWiJK3fO3OTS23ETLdRzo3ujozW"}
+                            src={allImages[currentImageIndex] || images.image }
                             alt={`${productName} - Image ${currentImageIndex + 1}`}
                             width={400}
                             height={400}
-                            className="object-contain mx-auto"
+                            className="object-contain w-auto h-auto max-h-[85%] mx-auto"
                         />
                     </motion.div>
                 </AnimatePresence>
+
+                {hasMultipleImages && (
+                    <>
+                        <button
+                            type="button"
+                            onClick={showPrevImage}
+                            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 rounded-full bg-white/90 hover:bg-white shadow-lg p-3 text-[#3674B5] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3674B5] focus-visible:ring-offset-2"
+                            aria-label="Previous image"
+                        >
+                            <ChevronLeft className="w-6 h-6" />
+                        </button>
+                        <button
+                            type="button"
+                            onClick={showNextImage}
+                            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 rounded-full bg-white/90 hover:bg-white shadow-lg p-3 text-[#3674B5] transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3674B5] focus-visible:ring-offset-2"
+                            aria-label="Next image"
+                        >
+                            <ChevronRight className="w-6 h-6" />
+                        </button>
+                    </>
+                )}
             </div>
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
                 {allImages.map((_, index) => (
@@ -244,7 +279,7 @@ export default function ProductPage({ params }) {
                                 >
                                     <div className="relative h-48 bg-gradient-to-br from-[#ecf8ff] to-[#e1f4ff] p-6 flex items-center justify-center">
                                         <Image
-                                            src={relatedProduct.image || "https://lh3.googleusercontent.com/d/1rXUi5eWiJK3fO3OTS23ETLdRzo3ujozW"}
+                                            src={relatedProduct.image || relatedProduct.image }
                                             alt={relatedProduct.name}
                                             width={150}
                                             height={150}
