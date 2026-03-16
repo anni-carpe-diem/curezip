@@ -108,18 +108,4 @@ storybook-static/
 .env.*.local
 .eslintcache
 
-# Ignore all images in public/products and public/team
-public/products/*
-public/team/*
 
-# Ignore all zip/tgz in public
-public/**/*.zip
-public/**/*.tgz
-
-# Ignore all images in public root
-public/*.png
-public/*.jpg
-public/*.jpeg
-public/*.svg
-
-# If you want to keep some images, remove those lines above or use Git LFS
